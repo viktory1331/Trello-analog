@@ -1,3 +1,5 @@
+import { Button, Checkbox, IconButton } from '@material-ui/core';
+import { Delete } from '@material-ui/icons';
 import React, { ChangeEvent, KeyboardEvent, useState } from 'react';
 import { AddItemForm } from './AddItemForm';
 import { FilterValuesType, TaskType } from './App';
@@ -34,9 +36,15 @@ function ToDoList(props: ToDoListPropsType) {
       props.changeTaskTitle(t.id, title, props.id);
     return (
       <li key={t.id}>
-        <input type="checkbox" checked={t.isDone} onChange={changeStatus} />
+        <Checkbox
+          color={'primary'}
+          checked={t.isDone}
+          onChange={changeStatus}
+        />
         <EditableSpan title={t.title} changeTitle={changeTaskTitle} />
-        <button onClick={removeTask}>X</button>
+        <IconButton onClick={removeTask}>
+          <Delete />
+        </IconButton>
       </li>
     );
   });
@@ -60,20 +68,44 @@ function ToDoList(props: ToDoListPropsType) {
       <div>
         <h3>
           <EditableSpan title={props.title} changeTitle={changeToDoListTitle} />
-          <button onClick={removeToDoList}>X</button>
+          <IconButton onClick={removeToDoList}>
+            <Delete />
+          </IconButton>
         </h3>
         <AddItemForm addItem={addTask} />
-        <ul>{tasks}</ul>
+        <ul style={{ listStyle: 'none', padding: '0px' }}>{tasks}</ul>
         <div>
-          <button className={allBtnClass} onClick={setAllFilterValue}>
+          <Button
+            style={{ marginRight: '5px' }}
+            size={'small'}
+            color={'primary'}
+            variant={props.toDoListFilter === 'all' ? 'outlined' : 'contained'}
+            onClick={setAllFilterValue}
+          >
             All
-          </button>
-          <button className={actBtnClass} onClick={setActiveFilterValue}>
+          </Button>
+          <Button
+            style={{ marginRight: '5px' }}
+            size={'small'}
+            color={'primary'}
+            variant={
+              props.toDoListFilter === 'active' ? 'outlined' : 'contained'
+            }
+            onClick={setActiveFilterValue}
+          >
             Active
-          </button>
-          <button className={cmplBtnClass} onClick={setCompletedFilterValue}>
+          </Button>
+          <Button
+            style={{ marginRight: '5px' }}
+            size={'small'}
+            color={'primary'}
+            variant={
+              props.toDoListFilter === 'complited' ? 'outlined' : 'contained'
+            }
+            onClick={setCompletedFilterValue}
+          >
             Complited
-          </button>
+          </Button>
         </div>
       </div>
     </div>
