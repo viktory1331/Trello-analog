@@ -1,0 +1,25 @@
+.App {
+  padding: 30px;
+  display: flex;
+}
+
+.App > div {
+  margin-right: 50px;
+}
+
+.active-filter {
+  background-color: rgb(187, 255, 218);
+}
+
+/* .dont-active-filter {
+  background-color: white;
+} */
+
+.error {
+  border: red 1px solid;
+  outline: transparent;
+}
+
+.error-text {
+  color: red;
+}
