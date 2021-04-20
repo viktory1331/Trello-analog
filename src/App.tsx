@@ -60,25 +60,6 @@ function App() {
     tasks[toDoListID] = tasks[toDoListID].filter((t) => t.id !== taskID);
     setTask({ ...tasks });
   }
-  function changeToDoListFilter(
-    newFilterValue: FilterValuesType,
-    toDoListID: string
-  ) {
-    const updatedToDoLists = toDoLists.map((tl) =>
-      tl.id === toDoListID ? { ...tl, filter: newFilterValue } : tl
-    );
-    setToDoLists(updatedToDoLists);
-  }
-  function getTasksForToDoList(toDoList: TodoListType): Array<TaskType> {
-    switch (toDoList.filter) {
-      case 'active':
-        return tasks[toDoList.id].filter((t) => t.isDone === false);
-      case 'complited':
-        return tasks[toDoList.id].filter((t) => t.isDone === true);
-      default:
-        return tasks[toDoList.id];
-    }
-  }
   function addTask(title: string, toDoListID: string) {
     const newTask = {
       id: v1(),
@@ -100,7 +81,6 @@ function App() {
     );
     setTask({ ...tasks, [toDoListID]: updatedTasks });
   }
-
   function changeTaskTitle(taskID: string, title: string, toDoListID: string) {
     const updatedTasks = tasks[toDoListID].map((t) =>
       t.id === taskID ? { ...t, title } : t
@@ -118,20 +98,37 @@ function App() {
     setToDoLists([...toDoLists, newToDoList]);
     setTask({ ...tasks, [newToDoListID]: [] });
   }
-
   function changeToDoListTitle(title: string, toDoListID: string) {
     const updatedToDoLists = toDoLists.map((tl) =>
       tl.id === toDoListID ? { ...tl, title } : tl
     );
     setToDoLists(updatedToDoLists);
   }
-
+  function changeToDoListFilter(
+    newFilterValue: FilterValuesType,
+    toDoListID: string
+  ) {
+    const updatedToDoLists = toDoLists.map((tl) =>
+      tl.id === toDoListID ? { ...tl, filter: newFilterValue } : tl
+    );
+    setToDoLists(updatedToDoLists);
+  }
   function removeToDoList(toDoListID: string) {
     const updatedTasks = toDoLists.filter((tl) => tl.id !== toDoListID);
     setToDoLists(updatedTasks);
     delete tasks[toDoListID];
   }
 
+  function getTasksForToDoList(toDoList: TodoListType): Array<TaskType> {
+    switch (toDoList.filter) {
+      case 'active':
+        return tasks[toDoList.id].filter((t) => t.isDone === false);
+      case 'complited':
+        return tasks[toDoList.id].filter((t) => t.isDone === true);
+      default:
+        return tasks[toDoList.id];
+    }
+  }
   const toDoListComponents = toDoLists.map((tl) => {
     return (
       <Grid item key={tl.id}>
