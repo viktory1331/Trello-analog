@@ -1,5 +1,5 @@
 import React from 'react'
-import {todolistReducer} from './todolist-reducer';
+import { todolistReducer, removeToDoListAc } from './todolist-reducer';
 import {v1} from 'uuid';
 import { FilterValuesType, TodoListType } from '../App';
 
@@ -13,7 +13,7 @@ test('correct todolist should be removed', () => {
        {id: todolistId2, title: "What to buy", filter: "all"}
    ]
 
-   const endState = todolistReducer(startState, { type: "Remove-ToDoList", toDoListID: todolistId1})
+   const endState = todolistReducer(startState, removeToDoListAc(todolistId1))
 
    expect(endState.length).toBe(1);
    expect(endState[0].id).toBe(todolistId2);
