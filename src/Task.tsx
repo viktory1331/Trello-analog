@@ -4,7 +4,7 @@ import React, { ChangeEvent } from 'react';
 import { EditableSpan } from './EditableSpan';
 import { TaskType } from './Todolist';
 
-type TaskPropsType = {
+export type TaskPropsType = {
   task: TaskType;
   removeTask: (taskId: string) => void;
   changeTaskStatus: (taskId: string, newIsDoneValue: boolean) => void;
