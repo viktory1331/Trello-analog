@@ -59,6 +59,7 @@ export const tasksReducer = (state: TasksStateType = initialState, action: Actio
             return stateCopy;
         }
         case 'CHANGE-TASK-STATUS': {
+            //зарефакторить статус мапом
             let todolistTasks = state[action.todolistId];
             // найдём нужную таску:
             let task = todolistTasks.find(t => t.id === action.taskId);
@@ -70,6 +71,7 @@ export const tasksReducer = (state: TasksStateType = initialState, action: Actio
             return ({...state});
         }
         case 'CHANGE-TASK-TITLE': {
+            //зарефакторить тайтл мапом
             let todolistTasks = state[action.todolistId];
             // найдём нужную таску:
             let task = todolistTasks.find(t => t.id === action.taskId);
